@@ -4,41 +4,37 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/main.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>浠〃鐩?鈥?闈㈣氨</title>
-
+<title>仪表盘 — 面谱</title>
 </head>
 <body>
 <header class="header">
 <div class="header-inner">
   <div class="header-brand">
-    <div class="brand-icon">闈?/div>
-    <div class="brand-name"><span>闈?/span>璋?/div>
+    <div class="brand-icon">面</div>
+    <div class="brand-name"><span>面</span>谱</div>
   </div>
   <nav class="header-nav">
-    <a href="dashboard.html" class="active">浠〃鐩?/a>
-    <a href="profile.html">涓汉妗ｆ</a>
-    <a href="analyze-new.html">鏂板鍒嗘瀽</a>
-    <a href="analyze-detail.html">鍒嗘瀽璇︽儏</a>
-    <a href="question-bank.html">闈㈣瘯棰樺簱</a>
+    <a href="dashboard.html" class="active">仪表盘</a>
+    <a href="profile.html">个人档案</a>
+    <a href="analyze-new.html">新增分析</a>
+    <a href="analyze-detail.html">分析详情</a>
+    <a href="question-bank.html">面试题库</a>
   </nav>
-  
 </div>
-</header>
-
-<main class="page">
+</header><main class="page">
 <div class="container">
   <div class="page-header">
-    <h1 class="page-title"><span class="eyebrow">Dashboard /</span>浠〃鐩?/h1>
+    <h1 class="page-title"><span class="eyebrow">Dashboard /</span>仪表盘</h1>
     <div style="display:flex;gap:var(--space-3)">
-      <a href="analyze-new.html" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-5);background:var(--accent);color:var(--accent-on);border-radius:var(--radius-pill);font-size:var(--text-sm);font-weight:500">+ 鏂板鍒嗘瀽</a>
-      <a href="question-bank.html" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-5);border:1px solid var(--border);border-radius:var(--radius-pill);font-size:var(--text-sm);color:var(--fg-2)">馃搼 闈㈣瘯棰樺簱</a>
+      <a href="analyze-new.html" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-5);background:var(--accent);color:var(--accent-on);border-radius:var(--radius-pill);font-size:var(--text-sm);font-weight:500">+ 新增分析</a>
+      <a href="question-bank.html" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-5);border:1px solid var(--border);border-radius:var(--radius-pill);font-size:var(--text-sm);color:var(--fg-2)">🎼 面试题库</a>
     </div>
   </div>
 
   <!-- Profile Summary -->
   <a href="profile.html" class="summary-card" style="text-decoration:none;color:inherit;display:flex;gap:var(--space-6);padding:var(--space-6);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
     <div class="summary-left" style="flex:1">
-      <div class="summary-name" style="font-size:var(--text-xl);font-weight:500;margin-bottom:var(--space-1)">鍔犺浇涓€?/div>
+      <div class="summary-name" style="font-size:var(--text-xl);font-weight:500;margin-bottom:var(--space-1)">加载中…</div>
       <div class="summary-title" style="font-size:var(--text-sm);color:var(--fg-2);margin-bottom:var(--space-2)"></div>
       <div class="summary-tags" style="display:flex;gap:var(--space-2);margin-bottom:var(--space-2)"></div>
       <div class="summary-meta" style="font-size:var(--text-xs);color:var(--muted)"></div>
@@ -47,13 +43,15 @@
   </a>
 
   <!-- Recent Analyses -->
-  <div class="section-title" style="font-size:var(--text-lg);font-weight:500;margin-bottom:var(--space-4)">杩戞湡宀椾綅鍒嗘瀽 <span class="count" style="color:var(--muted);font-weight:400"></span></div>
+  <div class="section-title" style="font-size:var(--text-lg);font-weight:500;margin-bottom:var(--space-4)">近期岗位分析 <span class="count" style="color:var(--muted);font-weight:400"></span></div>
   <div class="analysis-list">
-    <div style="text-align:center;padding:48px;color:var(--meta)">鍔犺浇涓€?/div>
+    <div style="text-align:center;padding:48px;color:var(--meta)">加载中…</div>
   </div>
 
 </div>
 </main>
+
+<footer class="footer"><div class="container">面谱 · AI 驱动的面试辅助系统</div></footer>
 
 <script src="js/storage.js"></script>
 <script src="js/ai-adapter.js"></script>
