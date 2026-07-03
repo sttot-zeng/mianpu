@@ -1,0 +1,375 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>面试题库 — 面谱</title>
+
+</head>
+<body>
+<header class="header">
+<div class="header-inner">
+  <div class="header-brand">
+    <div class="brand-icon">面</div>
+    <div class="brand-name"><span>面</span>谱</div>
+  </div>
+  <nav class="header-nav">
+    <a href="dashboard.html" >仪表盘</a>
+    <a href="profile.html">个人档案</a>
+    <a href="analyze-new.html">新增分析</a>
+    <a href="analyze-detail.html">分析详情</a>
+    <a href="question-bank.html" class="active">面试题库</a>
+  </nav>
+  
+</div>
+</header>
+<main class="page">
+<div class="container">
+    <div class="page-header">
+    <div class="page-title-row">
+      <h1 class="page-title">面试题库</h1>
+    </div>
+    <p class="page-subtitle">基于岗位 JD 与个人能力模型生成的定制化面试题目，涵盖 6 个维度共计 30 道题目</p>
+  </div>
+  <div class="action-bar">
+    <button class="action-btn" id="global-toggle-btn" onclick="toggleAllAnswers()">👁 显示全部答案</button>
+    <button class="action-btn primary" onclick="generateFromHere()">🎯 AI 重新生成</button>
+    <div class="spacer"></div>
+    <span style="font-size:var(--text-xs);color:var(--meta)">共 <span id="totalCount">30</span> 题</span>
+  </div>
+  <div class="section-card" data-section="self_intro">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-header-left">
+        <div class="section-icon si-1">📝</div>
+        <div>
+          <div class="section-name">自我认知</div>
+          <div class="section-meta" id="count-self_intro">面试开头 · 4 题</div>
+        </div>
+      </div>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="qsec-self_intro">
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">请做一个简短的自我介绍，突出你的技术栈和项目经验。</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">我叫张工，拥有5年前端开发经验。熟练掌握React/TypeScript/Next.js等技术栈，主导过多个大型Web应用的架构设计与性能优化。最近的项目是一个面向企业的低代码平台，我负责核心编辑器模块的开发与团队管理。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">你认为自己最大的技术优势是什么？有哪些地方还在持续提升？</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">最大优势是架构设计能力——能从0到1搭建可扩展的前端架构。在持续提升的方向：WebAssembly性能优化和AI辅助编程工具的实际落地应用。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">为什么选择离职/换工作？你对下一份工作的期望是什么？</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">希望在更具技术挑战性的环境中成长，接触更高并发、更复杂的业务场景。期望加入一个有技术深度、注重代码质量的团队。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">描述一次你解决复杂技术难题的经历。</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">在低代码平台项目中，遇到渲染性能瓶颈——大量组件同时渲染导致页面卡顿。我通过虚拟列表+增量渲染+Web Worker的方案，将渲染时间从2.3秒降低到300ms。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="more-questions" style="text-align:center;padding:var(--space-3) 0" id="more-section-self_intro">
+        <button class="action-btn" onclick="generateMore('self_intro')" style="color:var(--accent);border-color:var(--accent)">➕ 再多生成 3 条</button>
+      </div>
+    </div>
+  </div>
+  <div class="section-card" data-section="professional">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-header-left">
+        <div class="section-icon si-2">⚙️</div>
+        <div>
+          <div class="section-name">专业技能</div>
+          <div class="section-meta">React / TypeScript / 性能优化 · 6 题</div>
+        </div>
+      </div>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="qsec-professional">
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">TypeScript 中 type 和 interface 的区别是什么？什么情况下应该使用哪个？</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">interface 支持声明合并，更适合定义对象结构的契约；type 可以为联合类型、交叉类型等复杂类型起别名。优先使用 interface 定义公共 API 的类型，使用 type 处理联合类型、工具类型等场景。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">解释 React 中 Virtual DOM 的工作原理及其性能优势。</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">Virtual DOM 是真实 DOM 的轻量级 JS 对象表示。当状态变化时，React 通过 Diff 算法比较新旧 VDOM 树的差异，计算出最小化的 DOM 操作，再批量更新真实 DOM。优势：减少直接 DOM 操作次数、跨平台能力、声明式编程模型。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">什么是闭包？在实际项目中有哪些应用场景？</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">闭包是函数与其词法环境的组合。应用场景：防抖/节流函数、React Hooks（useState/useEffect 依赖闭包保存状态）、模块化私有变量、柯里化、高阶组件等。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">如何优化 React 应用的首次渲染速度？请列出至少三种方案。</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">1）代码分割（React.lazy + Suspense）按需加载；2）服务端渲染（Next.js）减少白屏时间；3）关键 CSS 内联、预加载关键资源；4）图片懒加载；5）Bundle 分析优化，移除未使用的依赖。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">CSS 的 BEM 命名规范是什么？有什么优缺点？</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">BEM 即 Block__Element--Modifier 命名模式。优点：命名清晰、组件间样式隔离、可维护性强。缺点：类名较长、在深层嵌套时不够灵活。适合大型项目团队协作。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">讲一下微前端架构的优缺点以及适用场景。</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">优点：独立开发部署、技术栈无关、增量迁移、隔离性。缺点：加载性能开销、样式/事件隔离复杂、公共依赖管理。适用场景：大型企业级应用、多团队协作、遗留系统渐进式重构。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="more-questions" style="text-align:center;padding:var(--space-3) 0" id="more-section-professional">
+        <button class="action-btn" onclick="generateMore('professional')" style="color:var(--accent);border-color:var(--accent)">➕ 再多生成 3 条</button>
+      </div>
+    </div>
+  </div>
+  <div class="section-card" data-section="project">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-header-left">
+        <div class="section-icon si-3">🏗️</div>
+        <div>
+          <div class="section-name">项目深挖</div>
+          <div class="section-meta">在前端技术栈中的落地实践 · 4 题</div>
+        </div>
+      </div>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="qsec-project">
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">请详细描述你最引以为豪的一个前端项目的技术架构。</div>
+          <span class="q-difficulty hard">困难</span>
+        </div>
+        <div class="q-answer">我主导设计的企业低代码平台前端架构采用微内核模式：核心层负责组件生命周期和渲染调度，插件层承载具体业务组件，通信层通过发布订阅模式实现跨组件协作。技术栈：React + TypeScript + Zustand + Monorepo。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">在这个项目中，你做了哪些技术选型决策？背后考虑是什么？</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">选择 Zustand 而非 Redux：API 简洁、TypeScript 支持好、不需要样板代码。选择 Monorepo（Turborepo）：共享类型定义和工具函数，统一构建流程。选择 Vite：开发启动快、HMR 体验优秀。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">项目开发中遇到过最大的技术挑战是什么？如何解决的？</div>
+          <span class="q-difficulty hard">困难</span>
+        </div>
+        <div class="q-answer">低代码画布的性能问题：100+ 组件同时渲染导致交互卡顿。解决方案：虚拟列表（仅渲染可视区域组件）+ 增量渲染（非关键组件延迟渲染）+ 快照对比（避免不必要的重渲染），最终 60fps 流畅运行。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">如果重新做这个项目，你会做哪些不同的设计决策？</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">1）早期引入端到端测试（Playwright）而不是后期补；2）设计阶段就考虑国际化方案，避免后期大规模重构；3）组件库采用更严格的版本管理规范。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="more-questions" style="text-align:center;padding:var(--space-3) 0" id="more-section-project">
+        <button class="action-btn" onclick="generateMore('project')" style="color:var(--accent);border-color:var(--accent)">➕ 再多生成 3 条</button>
+      </div>
+    </div>
+  </div>
+  <div class="section-card" data-section="behavioral">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-header-left">
+        <div class="section-icon si-3">🤝</div>
+        <div>
+          <div class="section-name">行为情景</div>
+          <div class="section-meta">STAR 法则回答 · 4 题</div>
+        </div>
+      </div>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="qsec-behavioral">
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">描述一次与产品经理在需求上的分歧，你是如何处理的？</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">运用 STAR 法则：情境（Situation）— 产品经理要求一周内完成复杂功能开发；任务（Task）— 评估技术可行性和开发成本；行动（Action）— 提供最小可行版本方案并展示技术约束；结果（Result）— 达成共识，分两期交付。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">说一个你在项目中推动技术改进的经历。</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">主动推动组内引入 TypeScript 迁移计划。先在小模块做 POC 验证收益，然后制定渐进式迁移路线图，编写迁移指南文档，组织 Code Review 保障质量。半年内团队所有新代码均使用 TypeScript 编写。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">如果在截止日期前发现需求有重大问题，你会怎么做？</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">1）立即评估影响范围和严重程度；2）及时同步项目经理和相关方；3）提供多个备选方案（延期/降级/分阶段）；4）制定应对计划并跟进执行。关键在于早暴露、早沟通。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">如何评估是否采用一个新的技术方案？请举例说明。</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">多维度评估：技术成熟度、团队熟悉度、社区活跃度、维护成本。举例：评估 Vite vs Webpack 时，我们用新项目做两周 POC，对比构建速度（5x 提升）、HMR 体验、插件生态覆盖度，最终决定在新项目中采用 Vite。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="more-questions" style="text-align:center;padding:var(--space-3) 0" id="more-section-behavioral">
+        <button class="action-btn" onclick="generateMore('behavioral')" style="color:var(--accent);border-color:var(--accent)">➕ 再多生成 3 条</button>
+      </div>
+    </div>
+  </div>
+  <div class="section-card" data-section="values">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-header-left">
+        <div class="section-icon si-3">💡</div>
+        <div>
+          <div class="section-name">个人价值观</div>
+          <div class="section-meta">职业规划 · 2 题</div>
+        </div>
+      </div>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="qsec-values">
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">你是如何看待工作与生活平衡的？</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">追求可持续的工作节奏。在项目关键期可以适度加班冲刺，但长期来看高效的 8 小时工作胜过低效的 12 小时。注重持续学习与成长，工作内通过复杂项目积累经验，工作外参与开源社区和技术博客写作。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">你理想中的团队文化是什么样的？</div>
+          <span class="q-difficulty easy">简单</span>
+        </div>
+        <div class="q-answer">透明开放、互相尊重、追求卓越。鼓励 Code Review 和技术分享，有建设性的反馈文化。团队有技术追求但不会过度工程化，在质量和效率之间找到平衡点。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="more-questions" style="text-align:center;padding:var(--space-3) 0" id="more-section-values">
+        <button class="action-btn" onclick="generateMore('values')" style="color:var(--accent);border-color:var(--accent)">➕ 再多生成 3 条</button>
+      </div>
+    </div>
+  </div>
+  <div class="section-card" data-section="open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-header-left">
+        <div class="section-icon si-3">🔮</div>
+        <div>
+          <div class="section-name">开放式问题</div>
+          <div class="section-meta">综合能力 · 2 题</div>
+        </div>
+      </div>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body" id="qsec-open">
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">如果让你设计一个前端监控系统，你会怎么设计？</div>
+          <span class="q-difficulty hard">困难</span>
+        </div>
+        <div class="q-answer">数据采集层（错误、性能、行为、自定义埋点）→ 数据处理层（采样、聚合、清洗）→ 存储查询层（时序数据库 + 搜索引擎）→ 可视化告警层（看板 + 智能告警）。关键：低侵入性 SDK、采样策略、sourcemap 还原、性能基线和自动告警阈值。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-card-header">
+          <div class="q-text">如何看待 AI 对前端开发的影响？你做了哪些准备？</div>
+          <span class="q-difficulty medium">中等</span>
+        </div>
+        <div class="q-answer">AI 是生产力工具而非替代者。Copilot 提升编码效率、AI 辅助代码审查、自动化测试生成。我做了：学习 Prompt Engineering、尝试 AI 辅助架构设计、关注 WebAssembly + AI 在客户端的落地前景。前端工程师的核心价值在于系统设计和用户体验。</div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+          <button class="q-expand-btn" onclick="toggleAnswer(this)">👁 查看答案</button>
+        </div>
+      </div>
+      <div class="more-questions" style="text-align:center;padding:var(--space-3) 0" id="more-section-open">
+        <button class="action-btn" onclick="generateMore('open')" style="color:var(--accent);border-color:var(--accent)">➕ 再多生成 3 条</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</main>
+
+<script src="js/storage.js"></script>
+<script src="js/ai-adapter.js"></script>
+<script src="js/app.js"></script>
+<script src="js/questions.js"></script>
+</body>
+</html>
+
+
+

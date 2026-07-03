@@ -1,0 +1,209 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新增分析 — 面谱</title>
+<style>
+:root{
+  --bg:#171717;--surface:#1c1c1c;--fg:#fafafa;--fg-2:#b4b4b4;--muted:#898989;--meta:#4d4d4d;
+  --border:#2e2e2e;--border-soft:#242424;--accent:#3ecf8e;--accent-on:#0f0f0f;--accent-hover:#00c573;
+  --font-display:"Circular","custom-font","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-body:"Circular","custom-font","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-mono:"Source Code Pro","Office Code Pro",Menlo,Monaco,Consolas,monospace;
+  --text-xs:12px;--text-sm:14px;--text-base:16px;--text-lg:18px;--text-xl:24px;--text-2xl:32px;
+  --leading-body:1.5;--leading-tight:1.00;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;
+  --space-5:20px;--space-6:24px;--space-8:32px;--space-12:48px;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:16px;--radius-pill:9999px;
+  --elev-flat:none;--elev-ring:0 0 0 1px var(--border);--elev-raised:0 0 0 1px var(--border),0 4px 12px rgba(0,0,0,0.4);
+  --motion-fast:150ms;--motion-base:200ms;--ease-standard:cubic-bezier(0.2,0,0,1);
+  --container-max:800px;--container-gutter-desktop:24px;--container-gutter-tablet:16px;--container-gutter-phone:16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--bg);color:var(--fg);line-height:var(--leading-body);min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--accent);text-decoration:none}
+.header{border-bottom:1px solid var(--border-soft);padding:var(--space-4) 0;position:sticky;top:0;background:var(--bg);z-index:100}
+.header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px}
+.header-brand{display:flex;align-items:center;gap:var(--space-3)}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--accent-on);font-weight:600;font-size:var(--text-lg)}
+.brand-name{font-size:var(--text-lg);font-weight:500;letter-spacing:-0.02em}
+.brand-name span{color:var(--accent)}
+.header-nav{display:flex;align-items:center;gap:var(--space-6)}
+.header-nav a{font-size:var(--text-sm);color:var(--fg-2);padding:var(--space-1) 0;border-bottom:2px solid transparent}
+.header-nav a:hover,.header-nav a.active{color:var(--fg);border-bottom-color:var(--accent)}
+@media(max-width:767px){.header-nav{display:none}.header-inner{padding:0 16px}}
+.page{padding:var(--space-8) 0;flex:1}
+.page-header{margin-bottom:var(--space-6);text-align:center}
+.page-title{font-size:var(--text-2xl);font-weight:400;letter-spacing:-0.01em}
+.page-sub{font-size:var(--text-sm);color:var(--muted);margin-top:var(--space-2)}
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:var(--space-8)}
+.step{display:flex;align-items:center;gap:var(--space-2)}
+.step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:500;border:2px solid var(--border);color:var(--meta);background:transparent}
+.step.active .step-circle{border-color:var(--accent);color:var(--accent);background:color-mix(in oklab,var(--accent),transparent 90%)}
+.step.done .step-circle{border-color:var(--accent);background:var(--accent);color:var(--accent-on)}
+.step-label{font-size:var(--text-sm);color:var(--meta)}
+.step.active .step-label{color:var(--fg)}
+.step.done .step-label{color:var(--accent)}
+.step-line{width:48px;height:1px;background:var(--border);margin:0 var(--space-2)}
+.step.done + .step-line{background:var(--accent)}
+.container{max-width:var(--container-max);margin:0 auto;padding:0 var(--container-gutter-desktop);width:100%}
+@media(max-width:1023px){.container{padding:0 var(--container-gutter-tablet)}}
+.btn-primary{padding:var(--space-2) var(--space-6);background:var(--accent);color:var(--accent-on);border:none;border-radius:var(--radius-pill);font-size:var(--text-sm);font-weight:500;cursor:pointer}
+.btn-primary:hover{opacity:0.9}
+.btn-secondary{padding:var(--space-2) var(--space-6);background:transparent;color:var(--fg-2);border:1px solid var(--border);border-radius:var(--radius-pill);font-size:var(--text-sm);cursor:pointer}
+.input-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-6)}
+.input-label{font-size:var(--text-sm);font-weight:500;margin-bottom:var(--space-3);display:flex;align-items:center;justify-content:space-between}
+.input-label .hint{font-size:var(--text-xs);color:var(--meta);font-weight:400}
+.jd-textarea{width:100%;min-height:240px;padding:var(--space-4);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--fg);font-size:var(--text-sm);font-family:var(--font-mono);line-height:1.7;resize:vertical}
+.jd-textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in oklab,var(--accent),transparent 70%)}
+.example-bar{display:flex;align-items:center;gap:var(--space-3);margin-top:var(--space-3);padding:var(--space-3);background:var(--bg);border:1px solid var(--border-soft);border-radius:var(--radius-md)}
+.example-bar span{font-size:var(--text-xs);color:var(--meta)}
+.example-btn{padding:var(--space-1) var(--space-3);border:1px solid var(--border);border-radius:var(--radius-pill);font-size:var(--text-xs);background:transparent;color:var(--fg-2);cursor:pointer}
+.example-btn:hover{border-color:var(--accent);color:var(--accent)}
+.url-row{display:flex;gap:var(--space-3);margin-top:var(--space-4);padding-top:var(--space-4);border-top:1px solid var(--border-soft);align-items:center}
+.url-row span{font-size:var(--text-xs);color:var(--meta);white-space:nowrap}
+.url-input{flex:1;padding:var(--space-2) var(--space-3);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--fg);font-size:var(--text-sm)}
+.url-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in oklab,var(--accent),transparent 70%)}
+.submit-area{display:flex;justify-content:center;margin-top:var(--space-6)}
+.progress-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.progress-overlay.show{display:flex}
+.progress-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-8);width:440px;max-width:90vw}
+.progress-title{font-size:var(--text-lg);font-weight:500;margin-bottom:var(--space-6);text-align:center}
+.progress-steps{display:flex;flex-direction:column;gap:var(--space-3)}
+.progress-step{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-3);border-radius:var(--radius-sm)}
+.progress-step.done{color:var(--accent)}
+.progress-step.active{color:var(--fg);background:color-mix(in oklab,var(--accent),transparent 95%)}
+.progress-step.pending{color:var(--meta)}
+.step-status{width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.step-status .spinner{width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.step-status .check{color:var(--accent);font-size:var(--text-base);font-weight:700}
+.step-status .circle{width:8px;height:8px;border-radius:50%;background:var(--meta)}
+.step-text{font-size:var(--text-sm)}
+.step-time{font-size:var(--text-xs);color:var(--meta);margin-left:auto}
+.done-state{display:none;text-align:center;padding:var(--space-8)}
+.done-state.show{display:block}
+.done-icon{width:56px;height:56px;border-radius:50%;background:color-mix(in oklab,var(--accent),transparent 80%);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-4);font-size:28px}
+.done-state h2{font-size:var(--text-xl);font-weight:500;margin-bottom:var(--space-2)}
+.done-state p{color:var(--fg-2);font-size:var(--text-sm);margin-bottom:var(--space-6)}
+.done-actions{display:flex;justify-content:center;gap:var(--space-3)}
+.footer{border-top:1px solid var(--border-soft);padding:var(--space-6) 0;text-align:center;font-size:var(--text-sm);color:var(--muted);margin-top:auto}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-inner">
+  <div class="header-brand">
+    <div class="brand-icon">面</div>
+    <div class="brand-name"><span>面</span>谱</div>
+  </div>
+  <nav class="header-nav">
+    <a href="dashboard.html">仪表盘</a>
+    <a href="profile.html">个人档案</a>
+    <a href="analyze-new.html" class="active">新增分析</a>
+    <a href="analyze-detail.html">分析详情</a>
+    <a href="question-bank.html">面试题库</a>
+  </nav>
+</div>
+</header><main class="page">
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">新增分析</h1>
+    <p class="page-sub">粘贴招聘信息，AI 自动分析公司背景、岗位匹配度和补齐方案</p>
+  </div>
+
+  <!-- Stepper -->
+  <div class="stepper">
+    <div class="step active" id="step1">
+      <div class="step-circle">1</div>
+      <span class="step-label">输入 JD</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step" id="step2">
+      <div class="step-circle">2</div>
+      <span class="step-label">正在分析</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step" id="step3">
+      <div class="step-circle">3</div>
+      <span class="step-label">查看结果</span>
+    </div>
+  </div>
+
+  <!-- Input Card -->
+  <div class="input-card" id="inputCard">
+    <div class="input-label">
+      <span>粘贴招聘信息 (JD)</span>
+      <span class="hint">支持 Boss 直聘、拉勾等平台</span>
+    </div>
+    <textarea class="jd-textarea" id="jdInput" placeholder="请粘贴职位描述（JD），至少 50 字&#10;&#10;建议包含：公司名称、岗位名称、薪资范围、任职要求、岗位职责等信息"></textarea>
+    <div class="example-bar">
+      <span>示例：</span>
+      <button class="example-btn" onclick="fillExample()">前端工程师</button>
+      <button class="example-btn" onclick="fillExample2()">全栈工程师</button>
+      <button style="margin-left:auto;font-size:var(--text-xs);color:var(--meta);background:none;border:none;cursor:pointer" onclick="document.getElementById('jdInput').value=''">清空</button>
+    </div>
+    <div class="url-row">
+      <span>或粘贴链接：</span>
+      <input class="url-input" id="jdUrl" placeholder="https://www.zhipin.com/job/...">
+      <button class="btn-secondary" onclick="fetchFromUrl()">抓取</button>
+    </div>
+    <div class="submit-area">
+      <button class="btn-primary" id="btnStartAnalysis" onclick="startAnalysis()">开始分析</button>
+    </div>
+  </div>
+
+  <!-- Progress Overlay -->
+  <div class="progress-overlay" id="progressOverlay">
+    <div class="progress-panel">
+      <div class="progress-title" id="progressTitle">正在分析招聘信息…</div>
+      <div class="progress-steps">
+        <div class="progress-step active" id="step1">
+          <div class="step-status"><span class="spinner"></span></div>
+          <span class="step-text">正在解析 JD 信息…</span>
+          <span class="step-time"></span>
+        </div>
+        <div class="progress-step" id="step2">
+          <div class="step-status"><span class="circle"></span></div>
+          <span class="step-text">正在分析公司信息…</span>
+          <span class="step-time"></span>
+        </div>
+        <div class="progress-step" id="step3">
+          <div class="step-status"><span class="circle"></span></div>
+          <span class="step-text">正在对比岗位要求…</span>
+          <span class="step-time"></span>
+        </div>
+        <div class="progress-step" id="step4">
+          <div class="step-status"><span class="circle"></span></div>
+          <span class="step-text">正在生成补齐方案…</span>
+          <span class="step-time"></span>
+        </div>
+      </div>
+      <div id="progressStatus" style="text-align:center;margin-top:var(--space-4);font-size:var(--text-sm);color:var(--fg-2)">请耐心等待…</div>
+    </div>
+  </div>
+
+  <!-- Done State -->
+  <div class="done-state" id="doneState">
+    <div class="done-icon">✅</div>
+    <h2>分析完成</h2>
+    <p id="doneMessage">正在跳转至结果页面…</p>
+    <div class="done-actions">
+      <a href="dashboard.html" class="btn-secondary">返回仪表盘</a>
+      <a href="analyze-detail.html" class="btn-primary">查看分析报告</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="footer"><div class="container">面谱 · AI 驱动的面试辅助系统</div></footer>
+
+<script src="js/storage.js"></script>
+<script src="js/ai-adapter.js"></script>
+<script src="js/app.js"></script>
+<script src="js/analyze.js"></script>
+</body>
+</html>

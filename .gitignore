@@ -1,0 +1,20 @@
+﻿面试经.zip
+bootstrap.ps1
+
+# app - design artifacts
+面试经/DESIGN-HANDOFF.md
+面试经/DESIGN-MANIFEST.json
+面试经/fix_debug.txt
+面试经/fix_qb.py
+面试经/mianpu-interview-system.html
+面试经/mr1xogl8*.png
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+
+# Editor
+.idea/
+.vscode/

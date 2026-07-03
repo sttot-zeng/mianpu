@@ -1,0 +1,181 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分析详情 — 面谱</title>
+
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="brand-icon">面</div>
+      <div class="brand-name"><span>面</span>谱</div>
+    </div>
+    <nav class="header-nav">
+      <a href="dashboard.html">仪表盘</a>
+      <a href="profile.html">个人档案</a>
+      <a href="analyze-new.html">新增分析</a>
+      <a href="analyze-detail.html" class="active">分析详情</a>
+      <a href="question-bank.html">面试题库</a>
+    </nav>
+    
+  </div>
+</header>
+
+<main class="page">
+<div class="container">
+  <div class="page-header">
+    <div class="page-title-row">
+      <div>
+        <h1 class="page-job-title">高级前端工程师</h1>
+        <div class="page-job-meta">
+          <span class="meta-item">星辰科技有限公司</span>
+          <span class="meta-item"><span class="sep">·</span>35K-50K · 16薪</span>
+          <span class="meta-item"><span class="sep">·</span>北京 · 望京</span>
+          <span class="meta-item"><span class="sep">·</span>分析时间 2026-07-01 14:32</span>
+        </div>
+      </div>
+      <div class="match-score-large">
+        <span class="score-value medium">72%</span>
+        <span class="score-label">匹配?br><span style="font-size:var(--text-xs);color:var(--warn)">基本胜任</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-bar" style="margin-bottom:var(--space-5)">
+    <a href="question-bank.html" id="btnQuestionBank" class="action-btn primary" onclick="localStorage.setItem('qb_generated','true')">📝 生成面试题库</a>
+    <button class="action-btn" onclick="exportAnalysis()">📥 导出报告</button>
+    <button class="action-btn" onclick="reanalyze()">🔄 重新分析</button>
+    <button class="action-btn danger" style="margin-left:auto" onclick="deleteCurrentAnalysis()">🗑 删除</button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="company">公司分析</button>
+    <button class="tab-btn" data-tab="match">岗位匹配</button>
+    <button class="tab-btn" data-tab="gap">差距与补齐</button>
+  </div>
+
+<div class="tab-content active" id="tab-company">
+    <div class="report-card">
+      <div class="rc-title">公司基本面<span class="badge blue">AI 分析</span></div>
+      <p>分析中...</p>
+      <div class="rc-meta">
+        <div class="rc-meta-item"><strong>行业</strong> -</div>
+        <div class="rc-meta-item"><strong>融资阶段</strong> -</div>
+        <div class="rc-meta-item"><strong>团队规模</strong> -</div>
+        <div class="rc-meta-item"><strong>面试难度</strong> -</div>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="rc-title">核心优势</div>
+      <div class="rc-meta"></div>
+    </div>
+
+    <div class="report-card">
+      <div class="rc-title">潜在风险 <span class="badge amber">注意</span></div>
+      <div class="risk-list">
+        <p style="color:var(--meta);padding:16px">暂无数据</p>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="rc-title">发展前景</div>
+      <p>分析中...</p>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-match">
+    <div class="report-card">
+      <div class="rc-title">岗位匹配</div>
+      <div class="match-list">
+        <p style="color:var(--meta);padding:16px">暂无匹配数据</p>
+      </div>
+    </div>
+    <div class="report-card">
+      <div class="rc-title">经验与学历</div>
+      <p style="color:var(--meta);padding:16px">暂无数据</p>
+    </div>
+  </div>
+
+  <!-- Tab 3: Gap -->
+  <div class="tab-content" id="tab-gap">
+    <div class="report-card">
+      <div class="rc-title">差距与补齐方案</div>
+      <p style="font-size:var(--text-sm);color:var(--fg-2)">以下差距按优先级排序，每项包含具体的学习路径和预估时间。优先补齐高频要求的技能。</p>
+    </div>
+
+    <div class="gap-list">
+      <div class="gap-card">
+        <div class="gap-header">
+          <span class="gap-title">1. Node.js 后端开发能力</span>
+          <span class="gap-time">⏱ 2 周</span>
+        </div>
+        <div class="gap-desc">JD 中 Node.js 列为加分项，目前你仅有基础知识，缺少完整项目经验。补齐后将提升竞争力并拓宽全栈能力。</div>
+        <div class="gap-plan"><strong>学习路径?/strong> ??Express/Koa 搭建一?CRUD API? 天）??接入数据库（Prisma/TypeORM? 天）??实现 JWT 认证 + 中间件（2 天）??结合 React 做一个完整全栈项目（5 天）<br><strong>推荐资源?/strong> 《Node.js 设计模式》第六版、Midway.js 官方教程、freeCodeCamp Node.js 课程</div>
+        <div class="gap-alt">💡 替代策略：面试时强调"在前端工程化中已大量使用 Node.js 生态工具（Webpack/Vite 插件开发、CLI 工具），具备快速上手后端开发的能力"</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-header">
+          <span class="gap-title">2. 微前端深入实践</span>
+          <span class="gap-time">⏱ 1 周</span>
+        </div>
+        <div class="gap-desc">你有微前端拆分经验，JD 强调"架构设计"能力，需要从使用者视角提升到架构设计视角。</div>
+        <div class="gap-plan"><strong>学习路径?/strong> ?深入理解 qiankun/single-spa 原理? 天）??学习 Module Federation? 天）??设计一个微前端方案文档? 天）??思考沙箱隔离、通信机制、公共依赖管理等架构问题? 天）<br><strong>推荐资源?/strong> Module Federation 官方示例、qiankun 源码分析、淘系技术微前端系列文章</div>
+        <div class="gap-alt">💡 替代策略：梳理你之前微前端改造中的架构决策和技术选型 reasoning，面试时突出"技术选型能力"而非"使用经验"</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-header">
+          <span class="gap-title">3. 开源项目贡献</span>
+          <span class="gap-time">⏱ 3 天</span>
+        </div>
+        <div class="gap-desc">JD 将开源贡献列为加分项。这不需要长时间积累，可以策略性地快速补上一个有效贡献。</div>
+        <div class="gap-plan"><strong>行动方案?/strong> ?找到你用过的某个开源库（React 相关最佳）???Issues 标签?"good first issue" ?"help wanted" 的任???提一个文档改进或小型 Bugfix PR ???PR 链接更新到简历上<br><strong>推荐方向?/strong> React 文档中文翻译、Ant Design 文档改进、你常用的开源组件库</div>
+        <div class="gap-alt">💡 替代策略：如果来不及，可以在项目经验中详细描述你主导的组件库或内部工具的建设过程，展?类开?的工程思维</div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="footer"><div class="container">面谱 · AI 驱动的面试辅助系统</div></footer>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+  });
+});
+
+// Question bank button state
+function updateQuestionBankBtn() {
+  const btn = document.getElementById('btnQuestionBank');
+  if(!btn) return;
+  if(localStorage.getItem('qb_generated') === 'true') {
+    btn.textContent = '\u{1f393} 查看面试题库';
+    btn.classList.remove('primary');
+    btn.style.borderColor = 'var(--accent)';
+    btn.style.color = 'var(--accent)';
+  }
+}
+updateQuestionBankBtn();
+</script>
+
+<script src="js/storage.js"></script>
+<script src="js/ai-adapter.js"></script>
+<script src="js/app.js"></script>
+<script src="js/analyze.js"></script>
+</body>
+</html>
+
+
+
+
+
